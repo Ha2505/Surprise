@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine? ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1"></script> <!-- Confetti Library -->
     <style>
         body {
             display: flex;
@@ -39,15 +40,8 @@
             border-radius: 50%;
         }
 
-        .heart::before {
-            top: -75px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: 75px;
-            top: 0;
-        }
+        .heart::before { top: -75px; left: 0; }
+        .heart::after { left: 75px; top: 0; }
 
         @keyframes pulse {
             0% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
@@ -95,16 +89,12 @@
         .yes {
             background: green;
             color: white;
+            margin-right: 30px;
         }
 
         .no {
             background: red;
             color: white;
-        }
-
-        /* Shift the buttons a bit apart */
-        .yes {
-            margin-right: 30px;
         }
     </style>
 </head>
@@ -121,20 +111,10 @@
         let noButton = document.querySelector('.no');
         let yesButton = document.querySelector('.yes');
         let phrases = [
-            "No", 
-            "Are you sure?", 
-            "What if I asked really nicely?", 
-            "Pretty please", 
-            "What about a Caramel Frappe", 
-            "PLEASE BUBBYYYY", 
-            "But :*(", 
-            "I am going to die", 
-            "Yep im dead", 
-            "ok ur talking to Harshul's ghost", 
-            "please babe", 
-            ":((((", 
-            "PRETTY PLEASE", 
-            "No :("
+            "No", "Are you sure?", "What if I asked really nicely?", "Pretty please",
+            "What about a Caramel Frappe", "PLEASE BUBBYYYY", "But :*(", "I am going to die",
+            "Yep, I'm dead", "Ok, you're talking to Harshul's ghost", "Please babe", ":((((",
+            "PRETTY PLEASE", "No :("
         ];
         let index = 0;
 
@@ -150,12 +130,21 @@
         }
 
         function goToFinalPage() {
-            window.location.href = 'final.html';
+            // Trigger confetti effect
+            confetti({
+                particleCount: 200,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            // Delay before redirecting to final page
+            setTimeout(() => {
+                window.location.href = 'final.html';
+            }, 3000);
         }
     </script>
 </body>
 </html>
-
 
 
 
