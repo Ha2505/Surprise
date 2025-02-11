@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 🎉</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        .gif {
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+        }
+        .fireworks {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="fireworks"></canvas>
+    <div class="container">
+        <h1>Heheheh:) I almost thought ud say NO! ❤️</h1>
+        <img class="gif" src="Love-kiss-gif-free.gif" alt="Cute Love Gif">
+    </div>
+    <script>
+        const canvas = document.querySelector('.fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        class Firework {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = Math.random() * 3 + 2;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 4,
+                    y: (Math.random() - 0.5) * 4
+                };
+                this.alpha = 1;
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.02;
+            }
+        }
+        
+        let fireworks = [];
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            fireworks = fireworks.filter(firework => firework.alpha > 0);
+            fireworks.forEach(firework => {
+                firework.update();
+                firework.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+        
+        setInterval(() => {
+            for (let i = 0; i < 10; i++) {
+                fireworks.push(new Firework(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }, 500);
+    </script>
+</body>
+</html>

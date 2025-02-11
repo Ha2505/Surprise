@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Heart Background */
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: pulse 1s infinite alternate;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -75px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 75px;
+            top: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+            100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); }
+        }
+
+        /* GIF above the heart */
+        .gif {
+            position: absolute;
+            top: 15%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://gifdb.com/images/high/hello-animated-milk-and-mocha-mad-poke-wczos5085dw6qo6c.webp');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Question Text */
+        .question {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .yes, .no {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .yes {
+            background: green;
+            color: white;
+        }
+
+        .no {
+            background: red;
+            color: white;
+        }
+
+        /* Shift the buttons a bit apart */
+        .yes {
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gif"></div>
+    <div class="heart"></div>
+    <div class="question">Will you be my Valentine? ❤️</div>
+    <div class="buttons">
+        <button class="yes" onclick="goToFinalPage()">Yes</button>
+        <button class="no" onclick="updateNoButton()">No</button>
+    </div>
+
+    <script>
+        let noButton = document.querySelector('.no');
+        let yesButton = document.querySelector('.yes');
+        let phrases = [
+            "No", 
+            "Are you sure?", 
+            "What if I asked really nicely?", 
+            "Pretty please", 
+            "What about a Caramel Frappe", 
+            "PLEASE BUBBYYYY", 
+            "But :*(", 
+            "I am going to die", 
+            "Yep im dead", 
+            "ok ur talking to Harshul's ghost", 
+            "please babe", 
+            ":((((", 
+            "PRETTY PLEASE", 
+            "No :("
+        ];
+        let index = 0;
+
+        function updateNoButton() {
+            if (index < phrases.length) {
+                noButton.textContent = phrases[index];
+                index++;
+
+                // Make the "Yes" button grow larger each time "No" is clicked
+                let scaleValue = 1 + index * 0.1;
+                yesButton.style.transform = `scale(${scaleValue})`;
+            }
+        }
+
+        function goToFinalPage() {
+            window.location.href = 'final.html';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
